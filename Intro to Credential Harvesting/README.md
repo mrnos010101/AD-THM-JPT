@@ -1,0 +1,3 @@
+Tags: Credential Harvesting, Mimikatz, DPAPI, Windows Vault, SAM, NTLM, LSA Secrets, NTDS.dit, DCSync, Pass-the-Hash, Impacket, secretsdump, John the Ripper, DCC2.
+Overview
+A hands-on room covering the five core Windows credential storage locations — LSASS Memory, SAM + SYSTEM hives, LSA Secrets, DPAPI Vault, and NTDS.dit — with practical extraction using Mimikatz, Impacket's secretsdump.py, and John the Ripper. The room progresses from local credential extraction on a workstation to a full DCSync attack against the domain controller, ending with Pass-the-Hash access to retrieve the final flag.
