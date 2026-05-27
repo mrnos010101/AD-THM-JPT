@@ -1,0 +1,3 @@
+Tags: Active Directory, PsExec, WinRM, Pass-the-Hash, SSH Tunneling, Pivoting, Proxychains, SOCKS Proxy, Port Forwarding, LAPS.
+/ Overview
+This room covers lateral movement techniques in Active Directory environments — the critical phase between initial compromise and domain takeover. Starting with a single set of domain credentials, the attack chain progresses through remote execution via PsExec and WinRM, Pass-the-Hash with stolen NTLM hashes, and SSH tunneling to pivot into a restricted network segment containing the Domain Controller. Each technique uses a different protocol and leaves a different forensic footprint, illustrating the attacker's toolkit for moving between hosts.
