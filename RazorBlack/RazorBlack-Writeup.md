@@ -3,7 +3,7 @@
 > **Difficulty:** Hard  
 > **OS:** Windows Server 2019  
 > **Tags:** Active Directory, Kerberos, NFS, Backup Operators, DPAPI, Pass-the-Hash  
-> **Author:** Xyan1d3  
+> **Author:** NEO   
 
 ---
 
