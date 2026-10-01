@@ -1,0 +1,3 @@
+Summary
+
+A hastily deployed Windows-based digital signage system exposes multiple layers of misconfiguration: anonymous FTP leaks operational notes, a guest-writable SMB share maps directly into the Apache webroot enabling PHP webshell upload, phpinfo() left accessible in production discloses the runtime user, AutoLogon stores the user password in plaintext registry, PowerShell command history exposes the Administrator password, and UltraVNC stores credentials encrypted with a well-known fixed DES key. The full chain demonstrates how "quick and dirty" deployments compound into total system compromise.
